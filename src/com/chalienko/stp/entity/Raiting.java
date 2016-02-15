@@ -1,0 +1,46 @@
+package com.chalienko.stp.entity;
+
+/**
+ * Created by dmitriy_chalienko on 15.02.16.
+ */
+public class Raiting {
+    private Expert expert;
+    private Target target;
+    private int raiting;
+
+    public Raiting(int raiting, Expert expert, Target target) {
+        this.raiting = raiting;
+        this.expert = expert;
+        this.target = target;
+    }
+
+    public Expert getExpert() {
+        return expert;
+    }
+
+    public void setExpert(Expert expert) {
+        this.expert = expert;
+    }
+
+    public int getRaiting() {
+        return raiting;
+    }
+
+    public void setRaiting(int raiting) {
+        this.raiting = raiting;
+    }
+
+    public Target getTarget() {
+        return target;
+    }
+
+    public void setTarget(Target target) {
+        this.target = target;
+    }
+    @Override
+    public String toString() {
+        return  "expert:" + expert +
+                ", target:" + target +
+                ", raiting:" + raiting;
+    }
+}
