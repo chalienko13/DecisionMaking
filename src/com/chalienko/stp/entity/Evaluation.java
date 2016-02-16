@@ -3,13 +3,13 @@ package com.chalienko.stp.entity;
 /**
  * Created by dmitriy_chalienko on 15.02.16.
  */
-public class Raiting {
+public class Evaluation {
     private Expert expert;
     private Target target;
-    private int raiting;
+    private int evaluation;
 
-    public Raiting(int raiting, Expert expert, Target target) {
-        this.raiting = raiting;
+    public Evaluation(int evaluation, Expert expert, Target target) {
+        this.evaluation = evaluation;
         this.expert = expert;
         this.target = target;
     }
@@ -22,12 +22,12 @@ public class Raiting {
         this.expert = expert;
     }
 
-    public int getRaiting() {
-        return raiting;
+    public int getEvaluation() {
+        return evaluation;
     }
 
-    public void setRaiting(int raiting) {
-        this.raiting = raiting;
+    public void setEvaluation(int evaluation) {
+        this.evaluation = evaluation;
     }
 
     public Target getTarget() {
@@ -41,6 +41,6 @@ public class Raiting {
     public String toString() {
         return  "expert:" + expert +
                 ", target:" + target +
-                ", raiting:" + raiting;
+                ", evaluation:" + evaluation;
     }
 }
