@@ -39,37 +39,73 @@ public class Controller {
     private List<Target> targets = new ArrayList<>();
     private List<Evaluation> evaluations = new ArrayList<>();
 
-
     @FXML
-    public void addTarget() {
-        targets.add(new Target(targetField.getText()));
+    public void initialize(){
+        for(int i = 1; i <= 6; i++ ){
+            addTargetToList(new Target("Target " + i));
+        }
+        for(int i = 1 ; i <= 3; i++){
+            addExpertToList(new Expert("Expert ", "" + i));
+        }
+        for (Expert expert : experts){
+            for (Target target : targets){
+                addEvaluationToList(new Evaluation((int) (Math.random()*10 + 1),expert,target));
+            }
+        }
+    }
+
+    private void addTargetToList(Target target){
+        targets.add(target);
         targetChoiceBox.getItems().add(targets.get(targets.size() - 1));
         targetListView.getItems().add(targets.get(targets.size() - 1));
+    }
+    @FXML
+    public void addTarget() {
+        addTargetToList(new Target(targetField.getText()));
+    }
+    private void addExpertToList(Expert expert){
+        experts.add(expert);
+        expertListView.getItems().add(experts.get(experts.size() - 1));
+        expertChoiceBox.getItems().add(experts.get(experts.size() - 1));
+
     }
 
     @FXML
     public void addExpert() {
-        experts.add(new Expert(firstNameField.getText(), lastNameField.getText()));
-        expertListView.getItems().add(experts.get(experts.size() - 1));
-        expertChoiceBox.getItems().add(experts.get(experts.size() - 1));
+        addExpertToList(new Expert(firstNameField.getText(),lastNameField.getText()));
     }
 
     @FXML
     public void addEvaluation() {
-        evaluations.add(new Evaluation(Integer.parseInt(raitingField.getText()),
+        addEvaluationToList(new Evaluation(Integer.parseInt(raitingField.getText()),
                 expertChoiceBox.getValue(), targetChoiceBox.getValue()));
         System.out.println(evaluations.get(evaluations.size()-1));
     }
+    private void addEvaluationToList(Evaluation evaluation){
+        evaluations.add(evaluation);
+        System.out.println(evaluations.get(evaluations.size()-1));
+    }
 
-    @FXML
-    public void calculateRating(){
-        List<Rating> resultRatings = Evaluator.advantageMethod(evaluations, targets, experts.size());
-        resultRatings.sort((o1, o2) -> o2.getRating().compareTo(o1.getRating()));
+    private void inputToWindow(List<Rating> resultRatings) {
         int row = 0;
+        gridPane.getChildren().clear();
+        resultRatings.sort((o1, o2) -> o2.getRating().compareTo(o1.getRating()));
         for (Rating rating : resultRatings){
             gridPane.add(new Label(rating.getTarget() + " "),0,row);
             gridPane.add(new Label(rating.getRating().toString()),1,row);
             row++;
         }
+    }
+
+    @FXML
+    public void calculateRatingRank(){
+        List<Rating> resultRatings = Evaluator.rankMethod(evaluations, targets, experts);
+        inputToWindow(resultRatings);
+    }
+
+    @FXML
+    public void calculateRating(){
+        List<Rating> resultRatings = Evaluator.advantageMethod(evaluations, targets, experts.size());
+        inputToWindow(resultRatings);
     }
 }

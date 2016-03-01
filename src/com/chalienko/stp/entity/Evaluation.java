@@ -6,7 +6,7 @@ package com.chalienko.stp.entity;
 public class Evaluation {
     private Expert expert;
     private Target target;
-    private int evaluation;
+    private double evaluation;
 
     public Evaluation(int evaluation, Expert expert, Target target) {
         this.evaluation = evaluation;
@@ -22,11 +22,11 @@ public class Evaluation {
         this.expert = expert;
     }
 
-    public int getEvaluation() {
+    public double getEvaluation() {
         return evaluation;
     }
 
-    public void setEvaluation(int evaluation) {
+    public void setEvaluation(double evaluation) {
         this.evaluation = evaluation;
     }
 

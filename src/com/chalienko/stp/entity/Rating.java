@@ -2,6 +2,9 @@ package com.chalienko.stp.entity;
 
 import com.chalienko.stp.Main;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /**
  * Created by dmitriy_chalienko on 16.02.16.
  */
@@ -23,7 +26,7 @@ public class Rating implements Comparable{
     }
 
     public Double getRating() {
-        return (double) Math.round(rating);
+        return  new BigDecimal(rating).setScale(4, RoundingMode.UP).doubleValue();
     }
 
     public void setRating(Double rating) {
